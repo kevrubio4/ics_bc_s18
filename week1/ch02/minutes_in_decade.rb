@@ -1,2 +1,2 @@
-var1 = 60 * 24 * 365.25 * 10
-puts var1.to_s + ' minutes in a decade.'
+decade_minutes = 60 * 24 * 365.25 * 10
+puts decade_minutes.to_s + ' minutes in a decade.'
