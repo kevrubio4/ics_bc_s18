@@ -1,9 +1,9 @@
 def sum_of_integers(n)
-  if ______________________
+  if n < 0
     n
   else
-    ______________________
+  n *= (n + 1)/2
   end
 end
 
-puts sum_of_integers __
+puts sum_of_integers 3

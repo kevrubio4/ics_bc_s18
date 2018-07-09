@@ -9,68 +9,165 @@ def english_number(number)
                   sixty seventy eighty ninety]
   teenagers = %w[eleven twelve thirteen
                  fourteen fifteen sixteen seventeen eighteen nineteen]
-  # "left" is how much of the number
-  # we still have left to write out.
-  # "write" is the part we are
-  # writing out right now.
-  # write and left...get it? :)
+
   left = number
-  write = left / 100 # How many hundreds left?
-  left -= write * 100 # Subtract off those hundreds.
+
+  write = left / 1000000000000
+  left -= write * 1000000000000
+
   if write > 0
-    # Now here's the recursion:
-    hundreds = english_number write
-    num_string = num_string + hundreds + ' hundred'
+    trillions = english_number write
+    num_string = num_string + trillions + ' trillion'
     if left > 0
-      # So we don't write 'two hundredfifty-one'...
       num_string += ' '
     end
   end
-  write = left / 10 # How many tens left?
-  left -= write * 10 # Subtract off those tens.
+
+  write = left / 100000000000
+  left -= write * 100000000000
+
+  if write > 0
+    hundreds = english_number write
+    num_string = num_string + hundreds + ' hundred'
+    if left > 0
+      num_string += ' '
+    end
+  end
+
+  write = left / 10_000_000_000
+  left -= write * 10000000000
+
   if write > 0
     if (write == 1) && (left > 0)
-      # Since we can't write "tenty-two" instead of
-      # "twelve", we have to make a special exception
-      # for these.
       num_string += teenagers[left - 1]
-      # The "-1" is because teenagers[3] is
-      # 'fourteen', not 'thirteen'.
-      # Since we took care of the digit in the
-      # ones place already, we have nothing left to write.
       left = 0
     else
       num_string += tens_place[write - 1]
-      # The "-1" is because tens_place[3] is
-      # 'forty', not 'thirty'.
     end
     if left > 0
-      # So we don't write 'sixtyfour'...
       num_string += '-'
     end
   end
-  write = left # How many ones left to write out?
-  left = 0 # Subtract off those ones.
+
+  write = left / 1000000000
+  left -= write * 1000000000
+
+  if write > 0
+    billions = english_number write
+    num_string = num_string + billions + ' billion'
+    if left > 0
+      num_string += ' '
+    end
+  end
+
+
+  write = left / 100000000
+  left -= write * 100000000
+
+  if write > 0
+    hundreds = english_number write
+    num_string = num_string + hundreds + ' hundred'
+    if left > 0
+      num_string += ' '
+    end
+  end
+
+  write = left / 10000000
+  left -= write * 10000000
+  if write > 0
+    if (write == 1) && (left > 0)
+      num_string += teenagers[left - 1]
+      left = 0
+    else
+      num_string += tens_place[write - 1]
+    end
+    if left > 0
+      num_string += '-'
+    end
+  end
+
+
+  write = left / 1000000
+  left -= write * 1000000
+
+  if write > 0
+    millions = english_number write
+    num_string = num_string + millions + ' million'
+    if left > 0
+      num_string += ' '
+    end
+  end
+
+
+  write = left / 100000
+  left -= write * 100000
+
+  if write > 0
+    hundreds = english_number write
+    num_string = num_string + hundreds + ' hundred'
+    if left > 0
+      num_string += ' '
+    end
+  end
+
+  write = left / 10000
+  left -= write * 10000
+
+  if write > 0
+    if (write == 1) && (left > 0)
+      num_string += teenagers[left - 1] + ' thousand'
+      left = 0
+    else
+      num_string += tens_place[write - 1] + ' thousand'
+    end
+    if left > 0
+      num_string += '-'
+    end
+  end
+
+  write = left / 1000
+  left -= write * 1000
+
+  if write > 0
+    thousands = english_number write
+    num_string = num_string + thousands + ' thousand'
+    if left > 0
+      num_string += ' '
+    end
+  end
+
+  write = left / 100
+  left -= write * 100
+
+  if write > 0
+    hundreds = english_number write
+    num_string = num_string + hundreds + ' hundred'
+    if left > 0
+      num_string += ' '
+    end
+  end
+
+  write = left / 10
+  left -= write * 10
+
+  if write > 0
+    if (write == 1) && (left > 0)
+      num_string += teenagers[left - 1]
+      left = 0
+    else
+      num_string += tens_place[write - 1]
+    end
+    if left > 0
+      num_string += '-'
+    end
+  end
+
+  write = left
+  left = 0
   if write > 0
     num_string += ones_place[write - 1]
-    # The "-1" is because ones_place[3] is
-    # 'four', not 'three'.
   end
-  # Now we just return "num_string"...
   num_string
 end
 
-puts english_number(0)
-puts english_number(9)
-puts english_number(10)
-puts english_number(11)
-puts english_number(17)
-puts english_number(32)
-puts english_number(88)
-puts english_number(99)
-puts english_number(100)
-puts english_number(101)
-puts english_number(234)
-puts english_number(3211)
-puts english_number(999_999)
-puts english_number(1_000_000_000_000)
+puts english_number(424745)

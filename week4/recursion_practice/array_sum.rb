@@ -1,9 +1,11 @@
 def array_sum(array)
-  if ______________________
+  if array.count == 1
     array[0]
   else
-    ______________________
+    array[0]+= array[array.count - 1]
+    array.pop
+    array_sum(array)
   end
 end
 
-puts array_sum [__, __, ...] 
+puts array_sum([2, 3, 1, 7])
